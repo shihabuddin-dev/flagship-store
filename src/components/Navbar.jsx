@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router';
 import { MdShoppingCart, MdBookmarkAdd } from "react-icons/md";
-
+import logo from '../assets/images/logo.png'
 
 const Navbar = () => {
     return (
@@ -28,7 +28,8 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-                <Link to='/' className="font-bold text-xl md:text-2xl">Flagship Shop</Link>
+                <Link to='/' className="font-bold text-2xl flex items-center">
+                    <img className='w-10' src={logo} alt="logo" /> Store</Link>
             </div>
             <div className="navbar-end  hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
