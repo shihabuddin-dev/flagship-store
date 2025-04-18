@@ -2,12 +2,16 @@ import React from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import Button from '../components/ui/Button';
 import { MdBookmarkAdd, MdOutlineShoppingCartCheckout } from "react-icons/md";
+import { addFavorite } from '../utils';
 
 const PhoneDetails = () => {
     const data = useLoaderData()
     const { id } = useParams()
-    const singleData = data.find(phone => phone.id === parseInt(id))
-    const { name, image, brand, model, description, storage, camera_info } = singleData || {}
+    const singlePhone = data.find(phone => phone.id === parseInt(id))
+    const { name, image, brand, model, description, storage, camera_info } = singlePhone || {}
+    const handleFavorite=()=>{
+        addFavorite(singlePhone)
+    }
     return (
         <div className='w-full py-12'>
             <img src={image} alt="" className='w-full mx-auto md:w-auto mb-8' />
@@ -16,7 +20,7 @@ const PhoneDetails = () => {
                 <h2 className='text-6xl font-thin mb-8'>{name}</h2>
                 <div className='space-x-4'>
                     <Button label={<MdOutlineShoppingCartCheckout />} />
-                    <Button label={<MdBookmarkAdd />} />
+                    <Button onClick={handleFavorite} label={<MdBookmarkAdd />} />
                 </div>
             </div>
             {/* details  */}
