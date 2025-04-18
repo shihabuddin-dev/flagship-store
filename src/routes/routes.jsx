@@ -5,7 +5,7 @@ import MailLayout from "../layouts/MailLayout";
 import About from "../pages/About";
 import Error from "../pages/Error";
 import Favorites from "../pages/Favorites";
-import PhonesContainer from "../components/PhonesContainer";
+import PhoneDetails from "../pages/PhoneDetails";
 
 const loader = <>
     <div className="flex justify-center mt-4">
@@ -21,11 +21,16 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                Component: Home,
                 hydrateFallbackElement: loader,
-                loader: () => fetch('../phones.json')
+                loader: () => fetch('../phones.json'),
+                Component: Home
             },
-            {path: '/phone-details:id', Component: PhonesContainer},
+            {
+                path: '/phone-details/:id',
+                hydrateFallbackElement: loader,
+                loader: () => fetch('../phones.json'),
+                Component: PhoneDetails
+            },
             { path: '/about', Component: About },
             { path: '/favorites', Component: Favorites }
         ]
