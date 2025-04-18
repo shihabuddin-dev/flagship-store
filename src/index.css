@@ -1,2 +1,14 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+a.active {
+  color: blue;
+}
+
+a.pending {
+  color: yellowgreen;
+}
+
+a.transitioning {
+  view-transition-name: my-transition;
+}
