@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData, useParams } from 'react-router';
 import Button from '../components/ui/Button';
 import { MdBookmarkAdd, MdOutlineShoppingCartCheckout } from "react-icons/md";
-import { addFavorite } from '../utils';
+import { addFavorite, addToCart, getCart } from '../utils';
+import { CartContext } from '../provider/Context';
 
 const PhoneDetails = () => {
+    const { setCart } = useContext(CartContext)
     const data = useLoaderData()
     const { id } = useParams()
     const singlePhone = data.find(phone => phone.id === parseInt(id))
     const { name, image, brand, model, description, storage, camera_info } = singlePhone || {}
-    const handleFavorite=()=>{
+    const handleFavorite = () => {
         addFavorite(singlePhone)
+    }
+    const handleCart= () => {
+        //save to local storage
+        addToCart(singlePhone)
+        // update card to local storage
+        setCart(getCart())
     }
     return (
         <div className='w-full py-12'>
@@ -19,7 +27,7 @@ const PhoneDetails = () => {
             <div className="flex justify-between items-center">
                 <h2 className='text-6xl font-thin mb-8'>{name}</h2>
                 <div className='space-x-4'>
-                    <Button label={<MdOutlineShoppingCartCheckout />} />
+                    <Button onClick={handleCart} label={<MdOutlineShoppingCartCheckout />} />
                     <Button onClick={handleFavorite} label={<MdBookmarkAdd />} />
                 </div>
             </div>
